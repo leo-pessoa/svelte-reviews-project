@@ -4,8 +4,10 @@
   import FeedbackForm from "./components/FeedbackForm.svelte";
 
   $: count = feedback.length;
-  $: average =
-    feedback.reduce((a, { rating }) => a + rating, 0) / feedback.length;
+
+  $: average = (
+    feedback.reduce((a, { rating }) => a + rating, 0) / feedback.length || 0
+  ).toFixed(2);
 
   let feedback = [
     {

@@ -3,7 +3,6 @@
   export let average;
 
   $: review = count != 1 ? "Reviews" : "Review";
-  $: avg = average ? average : 0;
 </script>
 
 <div class="feedback-stats">
@@ -11,7 +10,7 @@
     {count}
     {review}
   </h4>
-  <h4>Ratings Average: {avg}</h4>
+  <h4>Ratings Average: {average}</h4>
 </div>
 
 <style>
