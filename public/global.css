@@ -6,12 +6,15 @@
 	padding: 0;
 }
 
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+
 body {
-font-family: 'Montserrat', sans-serif;
+font-family: 'Open Sans', sans-serif;
 	font-style: normal;
-	background-color: #202142;
+	background-color: #fff;
 	line-height: 1.6;
-	color: #fff;
+	padding: 20px 50px;
 }
 
 ul {
@@ -21,5 +24,5 @@ ul {
 .container {
 	max-width: 768px;
 	margin: 100px auto;
-	padding: 0 20px;
+
 }

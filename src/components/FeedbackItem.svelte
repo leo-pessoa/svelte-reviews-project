@@ -1,12 +1,12 @@
 <script>
-  import Card from "./Card.svelte";
+  import Card from "./UI/Card.svelte";
   import { createEventDispatcher } from "svelte";
   export let item;
 
   const dispatch = createEventDispatcher();
 
   const handleDelete = (itemId) => {
-    dispatch("delete-feedback", itemId);
+    dispatch("delete-curso", itemId);
   };
 </script>
 
@@ -29,7 +29,6 @@
     height: 50px;
     background: #ff6a95;
     color: #fff;
-    border: 1px #eee solid;
     border-radius: 50%;
     padding: 10px;
     text-align: center;

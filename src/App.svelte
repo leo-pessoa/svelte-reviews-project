@@ -1,45 +1,40 @@
 <script>
-  import FeedbackList from "./components/FeedbackList.svelte";
-  import FeedbackStats from "./components/FeedbackStats.svelte";
-  import FeedbackForm from "./components/FeedbackForm.svelte";
+  import Router, { location } from "svelte-spa-router";
+  import Home from "./Home.svelte";
+  import { wrap } from "svelte-spa-router/wrap";
 
-  $: count = feedback.length;
-
-  $: average = (
-    feedback.reduce((a, { rating }) => a + rating, 0) / feedback.length || 0
-  ).toFixed(2);
-
-  let feedback = [
-    {
-      id: 1,
-      rating: 10,
-      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur vel vitae commodi alias voluptatem est voluptatum ipsa quae.",
-    },
-    {
-      id: 2,
-      rating: 9,
-      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur vel vitae commodi alias voluptatem est voluptatum ipsa quae.",
-    },
-    {
-      id: 3,
-      rating: 8,
-      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur vel vitae commodi alias voluptatem est voluptatum ipsa quae.",
-    },
-  ];
-
-  const deleteFeedback = (e) => {
-    const itemId = e.detail;
-    feedback = feedback.filter((item) => item.id != itemId);
+  const routes = {
+    "/": wrap({
+      component: Home,
+      // props: {
+      //   cursos,
+      // },
+    }),
   };
 
-  const addFeedback = (e) => {
-    const newFeedback = e.detail;
-    feedback = [newFeedback, ...feedback];
-  };
+  // const deleteFeedback = (e) => {
+  //   const itemId = e.detail;
+  //   feedback = feedback.filter((item) => item.id != itemId);
+  // };
+
+  // const addCourse = (e) => {
+  //   const newCourse = e.detail;
+  //   cursos = [newCourse, ...cursos];
+  // };
 </script>
 
+<nav>
+  <a href="/#/">Home</a>
+  <a href="/#/blog">Blog</a>
+</nav>
+
 <main class="container">
-  <FeedbackForm on:feedback-emitter={addFeedback} />
-  <FeedbackStats {count} {average} />
-  <FeedbackList {feedback} on:delete-feedback={deleteFeedback} />
+  <Router {routes} />
 </main>
+
+<style>
+  .container {
+    background-color: #fff;
+    padding: 20px 30px;
+  }
+</style>

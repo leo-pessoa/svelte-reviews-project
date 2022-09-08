@@ -1,107 +1,42 @@
-# This repo is no longer maintained. Consider using `npm init vite` and selecting the `svelte` option or — if you want a full-fledged app framework and don't mind using pre-1.0 software — use [SvelteKit](https://kit.svelte.dev), the official application framework for Svelte.
+# Yungas Front-end Challenge
 
----
+O objetivo deste desafio é avaliar a sua maneira de pensar e resolver os problemas propostos.
 
-# svelte app
+A forma como você resolverá este desafio é importante para entendermos seus padrões de qualidade, organização, performance, etc. No final, lhe daremos retorno sobre os pontos que achamos positivos e negativos.
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+A Yungas utiliza [Svelte](https://svelte.dev/) para seu front-end. Familiaridade com Svelte não é um requerimento, mas um diferencial. Se você teve experiência com outros frameworks (React, Vue, Angular) também será válido.
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+## O Desafio
 
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
+A Yungas é uma plataforma para redes de franquias com diversos módulos. A ideia desse desafio é simular, de maneira simplificada, o processo de desenvolvimento de um módulo da plataforma: o módulo de Treinamento.
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+O módulo de Treinamento é utilizado pelos clientes da Yungas para facilitar a capacitação de colaboradores e franqueados de suas redes, melhorando a produtividade dos colaboradores e o desempenho das franquias.
 
+Neste repositório você vai encontrar mockups do módulo de Treinamento, juntamente com um arquivo em Markdown ([USER-STORIES.md](./USER-STORIES.md)) descrevendo algumas das ações que usuários que solicitaram a feature querem executar nesse módulo.
 
-## Get started
+Sua tarefa é implementar as ações do módulo seguindo a linha estética dos mockups. Sinta-se livre para tomar suas próprias decisões de UI/UX e preencher "gaps" nos [mockups](https://www.figma.com/file/9RCzRXNv6iELZd2sJfQ59x/Teste-Front-end-Yungas?node-id=0%3A1). Suas decisões de UI/UX e sua capacidade de interpretação dos mockups serão utilizadas como critério de avaliação.
 
-Install the dependencies...
+[Mockup](https://www.figma.com/file/9RCzRXNv6iELZd2sJfQ59x/Teste-Front-end-Yungas?node-id=0%3A1)
 
-```bash
-cd svelte-app
-npm install
-```
+## As Regras
 
-...then start [Rollup](https://rollupjs.org):
+- Implementar em algum framework de front-end, de preferência o Svelte.
+- Disponibilizar o resultado em repositório público (não importa a plataforma).
 
-```bash
-npm run dev
-```
+## Os Critérios
 
-Navigate to [localhost:8080](http://localhost:8080). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+- Organização do projeto de acordo com responsabilidades.
+- Organização e reutilização do código via componentização.
+- Interpretação das intenções estéticas do mockup, capacidade de preencher os "gaps".
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
+## Extras
 
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
+- Se fizer em Svelte, top, gostamos de Svelte :^)
+- Responsividade & mobile first.
+- Utilizar TailwindCSS.
+- Presença e qualidade de testes.
+- Clean architecture.
+- Explicações (pode ser no README) de como seria o deploy deste app.
+- Deploy onde desejar, coloque o link no readme.
 
-## Building and running in production mode
-
-To create an optimised version of the app:
-
-```bash
-npm run build
-```
-
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
-
-
-## Single-page app mode
-
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
-
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
-
-```js
-"start": "sirv public --single"
-```
-
-## Using TypeScript
-
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
-
-```bash
-node scripts/setupTypeScript.js
-```
-
-Or remove the script via:
-
-```bash
-rm scripts/setupTypeScript.js
-```
-
-If you want to use `baseUrl` or `path` aliases within your `tsconfig`, you need to set up `@rollup/plugin-alias` to tell Rollup to resolve the aliases. For more info, see [this StackOverflow question](https://stackoverflow.com/questions/63427935/setup-tsconfig-path-in-svelte).
-
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+Obs.: Em relação aos extras, não é "tudo ou nada", faça o que conseguir!

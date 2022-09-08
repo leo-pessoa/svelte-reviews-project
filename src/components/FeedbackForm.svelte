@@ -1,100 +1,142 @@
 <script>
   import { v4 as uuidv4 } from "uuid";
-  import Card from "./Card.svelte";
-  import Button from "./Button.svelte";
-  import RatingSelect from "./RatingSelect.svelte";
+  import Button from "./UI/Button.svelte";
+  import schema from "../utils/schemas/schema";
+
   import { createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher();
 
-  let text = "";
-  let rating = 10;
+  let course = {
+    name: "",
+    description: "",
+    hours: "",
+    activation: "",
+    deactivation: "",
+  };
+
   let btnDisabled = true;
 
   let min = 10;
   let message = "";
-  const handleInput = () => {
-    if (text.trim().length <= min) {
-      message = `Text must be at least ${min} characters`;
-    } else {
-      message = null;
-      btnDisabled = false;
-    }
-  };
 
-  const handleSelect = (e) => (rating = e.detail);
+  let newCourse;
 
-  let newFeedback;
-  const handleSubmit = () => {
-    if (text.trim().length > min) {
-      newFeedback = {
+  let errors = {};
+
+  const handleSubmit = async () => {
+    try {
+      await schema.validate(course, { abortEarly: false });
+      alert(JSON.stringify(course, null, 2));
+      errors = {};
+      console.log(errors, "aaaaaaa");
+      const { name, hours, description, activation, deactivation } = course;
+
+      newCourse = {
         id: uuidv4(),
-        text,
-        rating: +rating,
+        name,
+        hours,
+        description,
+        activation,
+        deactivation,
       };
+
+      dispatch("curso-emitter", newCourse);
+    } catch (err) {
+      errors = err.inner.reduce((acc, err) => {
+        return { ...acc, [err.path]: err.message };
+      }, {});
     }
-    dispatch("feedback-emitter", newFeedback);
-    text = "";
   };
 </script>
 
-<Card>
-  <header>
-    <h2>How would you rate this service?</h2>
-  </header>
-  <form on:submit|preventDefault={handleSubmit}>
-    <RatingSelect on:rating-select={handleSelect} />
-    <div class="input-group">
-      <input
-        type="text"
-        bind:value={text}
-        on:input={handleInput}
-        placeholder="Tell us something that keeps you coming back"
-      />
-      <Button disabled={btnDisabled} type="submit">Send</Button>
-    </div>
-    {#if message}
-      <div class="message">
-        {message}
-      </div>
+<form on:submit|preventDefault={handleSubmit}>
+  <div class="input-group">
+    <label for="name">Nome</label>
+    <input
+      type="text"
+      id="name"
+      bind:value={course.name}
+      placeholder="Escreva sua mensagem"
+    />
+    {#if errors.name}
+      <span class="error">{errors.name}</span>
     {/if}
-  </form>
-</Card>
+    <label for="description">Descrição</label>
+    <input
+      type="text"
+      id="description"
+      bind:value={course.description}
+      placeholder="Escreva sua mensagem"
+    />
+    {#if errors.description}
+      <span class="error">{errors.description}</span>
+    {/if}
+    <label for="inputnumber1">Carga Horária</label>
+    <input
+      id="hours"
+      type="text"
+      bind:value={course.hours}
+      placeholder="Escreva sua mensagem"
+    />
+    {#if errors.hours}
+      <span class="error">{errors.hours}</span>
+    {/if}
+    <label for="inputnumber1">Ativação do Curso</label>
+    <input
+      type="text"
+      bind:value={course.activation}
+      placeholder="Escreva sua mensagem"
+    />
+    {#if errors.activation}
+      <span class="error">{errors.activation}</span>
+    {/if}
+    <label for="hours">Desativação do Curso</label>
+    <input
+      type="text"
+      bind:value={course.deactivation}
+      placeholder="Escreva sua mensagem"
+    />
+    {#if errors.deactivation}
+      <span class="error">{errors.deactivation}</span>
+    {/if}
+    <div class="send-buttons">
+      <Button disabled={btnDisabled} type="submit">Desabilitar</Button>
+      <Button disabled={btnDisabled} type="submit">Salvar</Button>
+    </div>
+  </div>
+  {#if message}
+    <div class="message">
+      {message}
+    </div>
+  {/if}
+</form>
 
-<style>
-  header {
-    max-width: 400px;
-    margin: auto;
-  }
-
-  header h2 {
-    font-size: 22px;
-    font-weight: 600;
-    text-align: center;
-  }
-
+<style lang="scss">
   .input-group {
     display: flex;
-    flex-direction: row;
-    border: 1px solid #ccc;
+    flex-direction: column;
     padding: 8px 10px;
     border-radius: 8px;
     margin-top: 15px;
-  }
 
-  input {
-    flex-grow: 2;
-    border: none;
-    font-size: 16px;
-  }
+    & > label {
+      font-size: 14px;
+    }
 
-  input:focus {
-    outline: none;
-  }
+    & > input {
+      flex-grow: 3;
+      border: none;
+      font-size: 16px;
+      margin-bottom: 10px;
+      height: 40px;
+      border-radius: 5px;
+      padding: 15px;
+      box-shadow: rgba(0, 0, 0, 0.15) 1px 2px 5px;
+    }
 
-  .message {
-    padding-top: 10px;
-    text-align: center;
-    color: rebeccapurple;
+    & > input:focus {
+      outline: none;
+    }
   }
 </style>

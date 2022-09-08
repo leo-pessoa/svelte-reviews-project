@@ -10,7 +10,7 @@
     {count}
     {review}
   </h4>
-  <h4>Ratings Average: {average}</h4>
+  <h4>Avaliação média: {average}</h4>
 </div>
 
 <style>
